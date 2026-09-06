@@ -13,6 +13,7 @@ Implementations of CPU scheduling algorithms.
 Currently implemented:
 
 - FCFS (First Come, First Served)
+- SJF (Shortest Job First) — Non-Preemptive
 
 More scheduling algorithms will be added as I implement them.
 
@@ -34,6 +35,7 @@ os-lab/
     │
     ├── schedulers/
     │   └── FCFS.c
+    |   └── SJF.c
     │
     └── source/
         └── scheduler_utilities.c
