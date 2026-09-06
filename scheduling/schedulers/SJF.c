@@ -1,0 +1,73 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "../include/scheduler_utilities.h"
+
+int main(){
+
+    int N;
+    printf("\nEnter the total number of processes: ");
+    scanf("%d", &N);
+
+    Process *p = malloc(sizeof(Process) * N);
+    if (p == NULL) return 1;
+
+    for (size_t i = 0; i < N; i++){
+        p[i].PID = i;
+        printf("\nP%d\n", i);
+        printf("Arrival time = ");
+        scanf("%d", &p[i].AT);
+        printf("Burst Time = ");
+        scanf("%d", &p[i].BT);
+        p[i].CT = p[i].TAT = p[i].WT = 0;
+    }
+
+    size_t clock = 0;
+    
+    int process_remaining = N;
+    int is_running = 0; // FALSE. Currently no process is running
+    int list[SIZE];
+    int running_process;
+
+    while (process_remaining > 0){
+    
+        if (exists(p, N, clock)){
+            find_all(p, N, clock, list);
+            enqueue(list);
+        }
+
+
+        if (!is_READY_empty() && is_running == 0){
+            running_process = SJF_delete(p);
+            p[running_process].CT = clock + p[running_process].BT;
+            is_running = 1;
+        }
+
+        clock++;
+
+        if (is_running == 1 && clock == p[running_process].CT){
+            p[running_process].TAT = p[running_process].CT - p[running_process].AT;
+            p[running_process].WT = p[running_process].TAT - p[running_process].BT;
+            process_remaining--;
+            is_running = 0;
+            printf("exit -> P%d\n", running_process);
+        }
+    }
+
+    int total_tat = 0;
+    int total_wt = 0;
+
+    printf("\nPID\tAT\tBT\tCT\tTAT\tWT\n");
+    for (size_t i = 0; i < N; i++){
+        total_tat += p[i].TAT;
+        total_wt += p[i].WT;
+        printf("P%d\t%d\t%d\t%d\t%d\t%d\n", p[i].PID, p[i].AT, p[i].BT, p[i].CT, p[i].TAT, p[i].WT);
+    }
+    
+    float avg_tat = (float)total_tat / N;
+    float avg_wt = (float)total_wt / N;
+
+    printf("\nAverage TAT = %.2f", avg_tat);
+    printf("\nAverage WT = %.2f", avg_wt);
+
+    free(p);
+}

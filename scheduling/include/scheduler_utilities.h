@@ -11,5 +11,6 @@ int enqueue(int list[]);
 int dequeue();
 int exists(const Process p[], size_t n, size_t clock);
 void find_all(const Process p[], size_t n, size_t clock, int list[]);
+int SJF_delete(const Process p[]);
 
 #endif
