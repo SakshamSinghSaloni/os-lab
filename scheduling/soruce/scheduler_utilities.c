@@ -1,5 +1,4 @@
 #include "scheduler_utilities.h"
-#include "process.h"
 
 int READY[SIZE], front = -1, rear = -1, queue_count = 0;
 

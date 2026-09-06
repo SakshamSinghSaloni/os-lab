@@ -2,6 +2,7 @@
 #define SCHEDULER_UTILITIES_H
 
 #include <stdio.h>
+#include "process.h"
 
 #define SIZE 100
 
