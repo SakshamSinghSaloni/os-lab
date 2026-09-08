@@ -52,7 +52,6 @@ int main(){
             p[running_process].WT = p[running_process].TAT - p[running_process].BT;
             process_remaining--;
             is_running = 0;
-            printf("exit -> P%d\n", running_process);
         }
     }
 
