@@ -43,15 +43,31 @@ int exists(const Process p[], size_t n, size_t clock){
 
 /*list[0] will contain the process count
 This way we will not be required to clear the list again and again*/
-void find_all(const Process p[], size_t n, size_t clock, int list[]){
+void find_all(const Process p[], int A[], size_t n, int value, Find_Policy policy, int list[]){
     int count = 0;
-    int idx = 1;
-    for (size_t i = 0; i < n; i++)
-        if (p[i].AT == clock){
-            count++;
-            list[idx++] = p[i].PID;
-        }
-    list[0] = count;
+    size_t idx = 1;
+
+    switch (policy)
+    {
+    case AT:
+        for (size_t i = 0; i < n; i++)
+            if (p[A[i]].AT == value){
+                count++;
+                list[idx++] = A[i];
+            }
+        list[0] = count;
+        break;
+    case BT:
+        for (size_t i = 0; i < n; i++)
+            if (p[A[i]].BT == value){
+                count++;
+                list[idx++] = A[i];
+            }
+        list[0] = count;
+        break;
+    default:
+        break;
+    }
 }
 
 /* for SJF, READY does not behave as a queue

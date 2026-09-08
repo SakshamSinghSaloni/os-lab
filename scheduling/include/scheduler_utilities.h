@@ -5,12 +5,13 @@
 #include "process.h"
 
 #define SIZE 100
+typedef enum Find_Policy {PID, AT, BT, PRIORITY} Find_Policy;
 
 int is_READY_empty();
 int enqueue(int list[]);
 int dequeue();
 int exists(const Process p[], size_t n, size_t clock);
-void find_all(const Process p[], size_t n, size_t clock, int list[]);
+void find_all(const Process p[], int A[], size_t n, int value, Find_Policy policy, int list[]);
 int SJF_delete(const Process p[]);
 
 #endif

@@ -8,6 +8,9 @@ int main(){
     printf("\nEnter the total number of processes: ");
     scanf("%d", &N);
 
+    int PID[N];
+    for (size_t i = 0; i < N; i++) PID[i] = i;
+
     Process *p = malloc(sizeof(Process) * N);
     if (p == NULL) return 1;
 
@@ -31,7 +34,7 @@ int main(){
     while (process_remaining > 0){
     
         if (exists(p, N, clock)){
-            find_all(p, N, clock, list);
+            find_all(p, PID, N, clock, AT, list);
             enqueue(list);
         }
 
