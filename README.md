@@ -12,7 +12,10 @@ Implementations of CPU scheduling algorithms.
 
 Currently implemented:
 
-- FCFS (First Come, First Served)
+- FCFS (First Come, First Served) — Non-Preemptive
+- Priority — Non-Preemptive
+- Priority — Preemptive
+- Round Robin — Preemptive
 - SJF (Shortest Job First) — Non-Preemptive
 - SRTF (Shortest Remining Time First) — Preemptive
 
@@ -36,8 +39,11 @@ os-lab/
     │
     ├── schedulers/
     │   └── FCFS.c
+    |   └── PRIORITY_NP.c
+    |   └── PRIORITY_P.c
+    |   └── RR.c
     |   └── SJF.c
-    |   └──SRTF.c
+    |   └── SRTF.c
     │
     └── source/
         └── scheduler_utilities.c
