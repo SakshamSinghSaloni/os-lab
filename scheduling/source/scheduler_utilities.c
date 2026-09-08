@@ -43,44 +43,41 @@ int exists(const Process p[], size_t n, size_t clock){
 
 /*list[0] will contain the process count
 This way we will not be required to clear the list again and again*/
-void find_all(const Process p[], int A[], size_t n, int value, Find_Policy policy, int list[]){
+void find_all(const Process p[], int A[], size_t n, int value, Policy policy, int list[]){
     int count = 0;
     size_t idx = 1;
 
-    switch (policy)
-    {
-    case AT:
-        for (size_t i = 0; i < n; i++)
-            if (p[A[i]].AT == value){
-                count++;
-                list[idx++] = A[i];
-            }
-        list[0] = count;
-        break;
-    case BT:
-        for (size_t i = 0; i < n; i++)
-            if (p[A[i]].BT == value){
-                count++;
-                list[idx++] = A[i];
-            }
-        list[0] = count;
-        break;
-    case PRIORITY:
-        for (size_t i = 0; i < n; i++)
-            if (p[A[i]].PRIORITY == value){
-                count++;
-                list[idx++] = A[i];
-            }
-        list[0] = count;
-        break;
-    default:
-        break;
+    switch (policy){
+        case AT:
+            for (size_t i = 0; i < n; i++)
+                if (p[A[i]].AT == value){
+                    count++;
+                    list[idx++] = A[i];
+                }
+            list[0] = count;
+            break;
+        case BT:
+            for (size_t i = 0; i < n; i++)
+                if (p[A[i]].BT == value){
+                    count++;
+                    list[idx++] = A[i];
+                }
+            list[0] = count;
+            break;
+        case PRIORITY:
+            for (size_t i = 0; i < n; i++)
+                if (p[A[i]].PRIORITY == value){
+                    count++;
+                    list[idx++] = A[i];
+                }
+            list[0] = count;
+            break;
     }
 }
 
 /*To find the minimum policy (PID, AT, BT, or PRIORITY) value
 in the given list of PIDs*/
-int find_min(const Process p[], int A[], int N, Find_Policy policy){
+int find_min(const Process p[], int A[], int N, Policy policy){
     int min = __INT_MAX__;
     switch (policy){
         case PID:
@@ -100,7 +97,7 @@ int find_min(const Process p[], int A[], int N, Find_Policy policy){
     return min;
 }
 
-int find_min_READY(const Process p[], Find_Policy policy){
+int find_min_READY(const Process p[], Policy policy){
     return find_min(p, READY, queue_count, policy);
 }
 
@@ -117,7 +114,7 @@ void arr_delete(int A[], size_t n, int val){
 
 /* for SJF, READY does not behave as a queue
 so we need separate delete logic*/
-int select_process(const Process p[], Find_Policy policy){
+int select_process(const Process p[], Policy policy){
 
     if (queue_count == 1){
         queue_count--;
