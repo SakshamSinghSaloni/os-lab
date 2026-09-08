@@ -70,27 +70,63 @@ void find_all(const Process p[], int A[], size_t n, int value, Find_Policy polic
     }
 }
 
-/* for SJF, READY does not behave as a queue
-so we need separate delete logic*/
-int SJF_delete(const Process p[]){
-    int del_idx = 0;
-    int min_BT = __INT_MAX__;
-
-    //using reverse iteration to resolve tie conditions
-    for (int i = queue_count - 1; i > -1; i--){
-        if (p[READY[i]].BT <= min_BT){
-            min_BT = p[READY[i]].BT;
-            del_idx = i;
-        }
+/*To find the minimum policy (PID, AT, BT, or PRIORITY) value
+in the given list of PIDs*/
+int find_min(const Process p[], int A[], int N, Find_Policy policy){
+    int min = __INT_MAX__;
+    switch (policy){
+        case PID:
+            for (size_t i = 0; i < N; i++) if (p[A[i]].PID < min) min = p[A[i]].PID;
+            break;
+        case AT:
+            for (size_t i = 0; i < N; i++) if (p[A[i]].AT < min) min = p[A[i]].AT;
+            break;
+        case BT:
+            for (size_t i = 0; i < N; i++) if (p[A[i]].BT < min) min = p[A[i]].BT;
+            break;
     }
 
-    int pid = READY[del_idx];
+    return min;
+}
 
-    for (size_t i = del_idx; i < queue_count - 1; i++)
-        READY[i] = READY[i + 1];
+void arr_delete(int A[], size_t n, int val){
+    int del_idx;
 
-    queue_count--;
-    rear--;
+    for (size_t i = 0; i < n; i++)
+        if (A[i] == val)
+            del_idx = i;
+    
+    for (size_t i = del_idx; i < n - 1; i++)
+        A[i] = A[i + 1];
+}
 
+/* for SJF, READY does not behave as a queue
+so we need separate delete logic*/
+int select_process(const Process p[], int N){
+
+    int pid;
+    int min_BT = find_min(p, READY, queue_count, BT);
+    int temp_out[SIZE];
+
+    find_all(p, READY, queue_count, min_BT, BT, temp_out);
+
+    int temp_in[temp_out[0]];
+    for (size_t i = 0; i < temp_out[0]; i++) temp_in[i] = temp_out[i + 1];
+
+    if (temp_out[0] == 1) pid = temp_out[1];
+    else{
+
+        int min_AT = find_min(p, temp_in, temp_out[0], AT);
+        find_all(p, temp_in, temp_out[0], min_AT, AT, temp_out);
+
+        for (size_t i = 0; i < temp_out[0]; i++) temp_in[i] = temp_out[i + 1];
+
+        if (temp_out[0] == 1) pid = temp_out[1];
+        else pid = find_min(p, temp_in, temp_out[0], PID);
+    }
+
+    arr_delete(READY, queue_count, pid);
+    queue_count--; rear--;
+    
     return pid;
 }

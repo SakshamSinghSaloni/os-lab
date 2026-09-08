@@ -40,7 +40,7 @@ int main(){
 
 
         if (!is_READY_empty() && is_running == 0){
-            running_process = SJF_delete(p);
+            running_process = select_process(p, N);
             p[running_process].CT = clock + p[running_process].BT;
             is_running = 1;
         }
