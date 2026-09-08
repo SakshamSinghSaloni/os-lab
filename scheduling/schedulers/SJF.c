@@ -40,7 +40,7 @@ int main(){
 
 
         if (!is_READY_empty() && is_running == 0){
-            running_process = select_process(p, N);
+            running_process = select_process(p, N, BT);
             p[running_process].CT = clock + p[running_process].BT;
             is_running = 1;
         }
@@ -52,7 +52,6 @@ int main(){
             p[running_process].WT = p[running_process].TAT - p[running_process].BT;
             process_remaining--;
             is_running = 0;
-            printf("exit -> P%d\n", running_process);
         }
     }
 
