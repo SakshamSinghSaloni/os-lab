@@ -43,7 +43,7 @@ int main(){
         }
 
         if (!is_READY_empty() && is_running == 0){
-            running_process = select_process(p, N, BT);
+            running_process = select_process(p, BT);
             is_running = 1;
         }
 
@@ -53,7 +53,7 @@ int main(){
         if (is_running == 1 && p[running_process].BT > min_BT){
             int old_process = running_process;
 
-            running_process = select_process(p, N, BT);
+            running_process = select_process(p, BT);
 
             list[0] = 1;
             list[1] = old_process;
