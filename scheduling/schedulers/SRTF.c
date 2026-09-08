@@ -21,7 +21,7 @@ int main(){
         scanf("%d", &p[i].AT);
         printf("Burst Time = ");
         scanf("%d", &p[i].BT);
-        p[i].CT = p[i].TAT = p[i].WT = 0;
+        p[i].CT = p[i].TAT = p[i].WT = p[i].PRIORITY = 0;
     }
 
     size_t clock = 0;
