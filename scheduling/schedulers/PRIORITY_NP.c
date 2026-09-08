@@ -36,7 +36,6 @@ int main(){
     int running_process;
 
     while (process_remaining > 0){
-        // printf("clock -> %d\n", clock);
 
         if (exists(p, N, clock)){
             find_all(p, PID_list, N, clock, AT, list);
@@ -47,7 +46,6 @@ int main(){
             running_process = select_process(p, PRIORITY);
             p[running_process].CT = clock + p[running_process].BT;
             is_running = 1;
-            printf("S%d P%d ", clock, running_process);
         }
 
         clock++;
@@ -57,7 +55,6 @@ int main(){
             p[running_process].WT = p[running_process].TAT - p[running_process].BT;
             process_remaining--;
             is_running = 0;
-            printf("E%d\n", clock);
         }
     }
 
