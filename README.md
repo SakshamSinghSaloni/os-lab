@@ -14,6 +14,7 @@ Currently implemented:
 
 - FCFS (First Come, First Served)
 - SJF (Shortest Job First) — Non-Preemptive
+- SRTF (Shortest Remining Time First) — Preemptive
 
 More scheduling algorithms will be added as I implement them.
 
@@ -36,6 +37,7 @@ os-lab/
     ├── schedulers/
     │   └── FCFS.c
     |   └── SJF.c
+    |   └──SRTF.c
     │
     └── source/
         └── scheduler_utilities.c
