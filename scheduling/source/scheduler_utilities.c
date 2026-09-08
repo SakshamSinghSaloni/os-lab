@@ -35,6 +35,10 @@ int is_READY_empty(){
     return front == -1;
 }
 
+int get_READY_count(){
+    return queue_count;
+}
+
 // return values are treated as boolean
 int exists(const Process p[], size_t n, size_t clock){
     for (size_t i = 0; i < n; i++) if (p[i].AT == clock) return 1; // exist
@@ -89,6 +93,10 @@ int find_min(const Process p[], int A[], int N, Find_Policy policy){
     return min;
 }
 
+int find_min_READY(const Process p[], Find_Policy policy){
+    return find_min(p, READY, queue_count, policy);
+}
+
 void arr_delete(int A[], size_t n, int val){
     int del_idx;
 
@@ -102,7 +110,13 @@ void arr_delete(int A[], size_t n, int val){
 
 /* for SJF, READY does not behave as a queue
 so we need separate delete logic*/
-int select_process(const Process p[], int N){
+int select_process(const Process p[], int N, Find_Policy policy){
+
+    if (queue_count == 1){
+        queue_count--;
+        rear--;
+        return READY[0];
+    }
 
     int pid;
     int min_BT = find_min(p, READY, queue_count, BT);
