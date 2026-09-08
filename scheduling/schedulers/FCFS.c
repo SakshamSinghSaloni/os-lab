@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "scheduler_utilities.h"
+#include "../include/scheduler_utilities.h"
 
 int main(){
 
