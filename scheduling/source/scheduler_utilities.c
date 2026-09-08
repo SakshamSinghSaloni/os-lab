@@ -35,10 +35,6 @@ int is_READY_empty(){
     return queue_count == 0;
 }
 
-int get_READY_count(){
-    return queue_count;
-}
-
 // return values are treated as boolean
 int exists(const Process p[], size_t n, size_t clock){
     for (size_t i = 0; i < n; i++) if (p[i].AT == clock) return 1; // exist

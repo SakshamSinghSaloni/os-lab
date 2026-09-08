@@ -8,7 +8,6 @@
 typedef enum Find_Policy {PID, AT, BT, PRIORITY} Find_Policy;
 
 int is_READY_empty();
-int get_READY_count();
 int enqueue(int list[]);
 int dequeue();
 int exists(const Process p[], size_t n, size_t clock);
