@@ -8,6 +8,7 @@ typedef struct Process{
     int CT; // Completion Time
     int TAT; // Turnaround Time
     int WT; // Waiting Time
+    int PRIORITY;
 }Process;
 
 #endif
