@@ -32,7 +32,7 @@ int dequeue(){
 }
 
 int is_READY_empty(){
-    return front == -1;
+    return queue_count == 0;
 }
 
 int get_READY_count(){
@@ -97,7 +97,7 @@ int find_min(const Process p[], int A[], int N, Find_Policy policy){
             for (size_t i = 0; i < N; i++) if (p[A[i]].BT < min) min = p[A[i]].BT;
             break;
         case PRIORITY:  
-            for (size_t i = 0; i < N; i++) if (p[A[i]].PRIORITY < min) min = p[A[i]].BT;
+            for (size_t i = 0; i < N; i++) if (p[A[i]].PRIORITY < min) min = p[A[i]].PRIORITY;
             break;
     }
 
