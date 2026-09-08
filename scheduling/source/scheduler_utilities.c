@@ -69,6 +69,14 @@ void find_all(const Process p[], int A[], size_t n, int value, Find_Policy polic
             }
         list[0] = count;
         break;
+    case PRIORITY:
+        for (size_t i = 0; i < n; i++)
+            if (p[A[i]].PRIORITY == value){
+                count++;
+                list[idx++] = A[i];
+            }
+        list[0] = count;
+        break;
     default:
         break;
     }
@@ -87,6 +95,9 @@ int find_min(const Process p[], int A[], int N, Find_Policy policy){
             break;
         case BT:
             for (size_t i = 0; i < N; i++) if (p[A[i]].BT < min) min = p[A[i]].BT;
+            break;
+        case PRIORITY:  
+            for (size_t i = 0; i < N; i++) if (p[A[i]].PRIORITY < min) min = p[A[i]].BT;
             break;
     }
 
@@ -110,7 +121,7 @@ void arr_delete(int A[], size_t n, int val){
 
 /* for SJF, READY does not behave as a queue
 so we need separate delete logic*/
-int select_process(const Process p[], int N, Find_Policy policy){
+int select_process(const Process p[], Find_Policy policy){
 
     if (queue_count == 1){
         queue_count--;
@@ -119,10 +130,10 @@ int select_process(const Process p[], int N, Find_Policy policy){
     }
 
     int pid;
-    int min_BT = find_min(p, READY, queue_count, BT);
+    int min_val = find_min(p, READY, queue_count, policy);
     int temp_out[SIZE];
 
-    find_all(p, READY, queue_count, min_BT, BT, temp_out);
+    find_all(p, READY, queue_count, min_val, policy, temp_out);
 
     int temp_in[temp_out[0]];
     for (size_t i = 0; i < temp_out[0]; i++) temp_in[i] = temp_out[i + 1];
