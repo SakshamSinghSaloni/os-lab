@@ -2,36 +2,15 @@
 #include <stdlib.h>
 #include "../include/scheduler_utilities.h"
 
-int main(){
-
-    int N;
-    printf("\nEnter the total number of processes: ");
-    scanf("%d", &N);
-
-    int quanta;
-    printf("\nTime Quanta: ");
-    scanf("%d", &quanta);
+void ROUND_ROBIN(Process p[], int N, int quanta){
 
     int PID_list[N];
     for (size_t i = 0; i < N; i++) PID_list[i] = i;
-
-    Process *p = malloc(sizeof(Process) * N);
-    if (p == NULL) return 1;
-
-    for (size_t i = 0; i < N; i++){
-        p[i].PID = i;
-        printf("\nP%d\n", i);
-        printf("Arrival time = ");
-        scanf("%d", &p[i].AT);
-        printf("Burst Time = ");
-        scanf("%d", &p[i].BT);
-        p[i].CT = p[i].TAT = p[i].WT = p[i].PRIORITY = 0;
-    }
-
-    size_t clock = 0;
-
+    
     int original_BT[N];
     for (size_t i = 0; i < N; i++) original_BT[i] = p[i].BT;
+
+    size_t clock = 0;
     
     int process_remaining = N;
     int is_running = 0; // FALSE. Currently no process is running
@@ -83,6 +62,32 @@ int main(){
             is_running = 0;
         }
     }
+}
+
+int main(){
+
+    int N;
+    printf("\nEnter the total number of processes: ");
+    scanf("%d", &N);
+
+    int quanta;
+    printf("\nTime Quanta: ");
+    scanf("%d", &quanta);
+
+    Process *p = malloc(sizeof(Process) * N);
+    if (p == NULL) return 1;
+
+    for (size_t i = 0; i < N; i++){
+        p[i].PID = i;
+        printf("\nP%d\n", i);
+        printf("Arrival time = ");
+        scanf("%d", &p[i].AT);
+        printf("Burst Time = ");
+        scanf("%d", &p[i].BT);
+        p[i].CT = p[i].TAT = p[i].WT = p[i].PRIORITY = 0;
+    }
+
+    ROUND_ROBIN(p, N, quanta);
 
     int total_tat = 0;
     int total_wt = 0;
