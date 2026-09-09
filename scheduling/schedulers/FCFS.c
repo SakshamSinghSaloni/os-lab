@@ -38,7 +38,6 @@ int main(){
             enqueue(list);
         }
 
-
         if (!is_READY_empty() && is_running == 0){
             running_process = dequeue();
             p[running_process].CT = clock + p[running_process].BT;
