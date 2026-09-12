@@ -1,4 +1,5 @@
 #include "../include/schedulers.h"
+#include "../internal/ready_manager.h"
 
 void PRIORITY_P(Process p[], int N){
 

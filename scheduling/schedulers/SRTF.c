@@ -1,4 +1,5 @@
 #include "../include/schedulers.h"
+#include "../internal/ready_manager.h"
 
 void SRTF(Process p[], int N){
 

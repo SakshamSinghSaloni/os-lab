@@ -1,4 +1,5 @@
 #include "../include/schedulers.h"
+#include "../internal/ready_manager.h"
 
 void SJF(Process p[], int N){
 

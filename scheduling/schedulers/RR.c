@@ -1,4 +1,5 @@
 #include "../include/schedulers.h"
+#include "../internal/ready_manager.h"
 
 void ROUND_ROBIN(Process p[], int N, int quanta){
 
