@@ -1,8 +1,8 @@
 #ifndef SCHEDULERS_H
 #define SCHEDULERS_H
 
+#include <stddef.h>
 #include "process.h";
-#include "scheduler_utilities.h";
 
 void FCFS(Process p[], int N);
 void PRIORITY_NP(Process p[], int N);
