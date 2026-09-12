@@ -11,4 +11,6 @@ typedef struct Process{
     int PRIORITY; // Lower Priority, Higher Preference
 }Process;
 
+typedef enum Policy {PID, AT, BT, PRIORITY} Policy;
+
 #endif
