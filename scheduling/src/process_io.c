@@ -60,26 +60,3 @@ void print_process_table(const Process *p, int N){
         printf("%d\t%d\t%d\t%d\t%d\t%d\t%d\n", p[i].PID, p[i].AT, p[i].BT, p[i].CT, p[i].TAT, p[i].WT, p[i].PRIORITY);
         
 }
-
-int main(){
-
-    printf("Processes ");
-    int N = enter_value();
-
-    printf("Quanta ");
-    int quanta = enter_value();
-    
-    Process *p = processes_init(N, PID);
-    // Process* p = processes_init(N, PRIORITY);
-
-    // FCFS(p, N);
-    // SJF(p, N);
-    // SRTF(p, N);
-    // PRIORITY_NP(p, N);
-    // PRIORITY_P(p, N);
-    ROUND_ROBIN(p, N, quanta);
-
-    print_process_table(p, N);
-
-    processes_dest(p);
-}
