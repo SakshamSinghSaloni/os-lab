@@ -11,6 +11,12 @@ typedef struct Process{
     int PRIORITY; // Lower Priority, Higher Preference
 }Process;
 
+typedef struct{
+    int PID; // PID of the process
+    int ST; // Start time of the process
+    int FT; // Finish time of the process
+}Execution;
+
 typedef enum Policy {PID, AT, BT, PRIORITY} Policy;
 typedef enum {NON_PRIORITY_MODE, PRIORITY_MODE} InputMode;
 
