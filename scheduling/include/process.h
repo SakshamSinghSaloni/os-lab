@@ -12,5 +12,6 @@ typedef struct Process{
 }Process;
 
 typedef enum Policy {PID, AT, BT, PRIORITY} Policy;
+typedef enum {NON_PRIORITY_MODE, PRIORITY_MODE} InputMode;
 
 #endif

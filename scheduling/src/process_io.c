@@ -3,7 +3,7 @@
 #include "../include/schedulers.h"
 #include "../include/process.h"
 
-Process* processes_init(int N, Policy policy){
+Process* processes_init(int N, InputMode mode){
 
     if (N < 1) return NULL;
     Process* p = malloc(sizeof(Process) * N);
@@ -23,7 +23,7 @@ Process* processes_init(int N, Policy policy){
 
         p[i].CT = p[i].TAT = p[i].WT = 0;
 
-        if (policy == PRIORITY){
+        if (mode == PRIORITY_MODE){
             printf("Priority = ");
             scanf("%d", &p[i].PRIORITY);
         }
