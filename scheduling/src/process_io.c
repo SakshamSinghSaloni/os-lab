@@ -5,6 +5,7 @@
 
 Process* processes_init(int N, Policy policy){
 
+    if (N < 1) return NULL;
     Process* p = malloc(sizeof(Process) * N);
     if (p == NULL) return NULL;
 
@@ -36,20 +37,6 @@ Process* processes_init(int N, Policy policy){
 
 void processes_dest(Process* p){
     free(p);
-}
-
-int enter_value(){
-    int n;
-
-    do{
-        printf("Enter : ");
-        scanf("%d", &n);
-
-        if (n < 1) printf("Enter value greater than 0!\n");
-    
-    } while (n < 1);
-
-    return n;
 }
 
 void print_process_table(const Process *p, int N){
